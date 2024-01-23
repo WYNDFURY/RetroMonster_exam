@@ -1,7 +1,7 @@
 @extends('templates.index')
 
 @section('title')
-    {{ $user->username }}
+    {{ $user->name }}
 @stop
 
 @section('content')
@@ -10,14 +10,14 @@
         <section class="w-full">
             <section class="mb-20">
                 <h2 class="text-4xl font-bold creepster text-center mb-8">
-                    Profil de {{$user->username}} 
+                    Profil de {{$user->name}} 
                 </h2>
                 <div class="bg-gray-700 rounded-lg shadow-lg">
                     <div class="md:flex">
                         <!-- Image du monstre -->
                         <div class="w-full md:w-1/2 relative">
                             <img class="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
-                                src="https://placebeard.it/640/480" alt="{{ $user->username }}" />
+                                src="https://placebeard.it/640/480" alt="{{ $user->name }}" />
                             <div class="absolute top-4 right-4">
                                 <button
                                     class="text-white bg-gray-400 hover:bg-red-700 rounded-full p-2 transition-colors duration-300"
@@ -34,7 +34,7 @@
                         </div>
                         <div class="p-6 md:w-1/2">
                             <h2 class="text-3xl font-bold mb-2 creepster">
-                                {{ $user->username }}
+                                {{ $user->name }}
                             </h2>
                             <div class="mb-4">
                                 <div>
@@ -55,7 +55,7 @@
     </div>
 
     <h2 class="text-4xl font-bold creepster text-center mb-8">
-        Deck de {{$user->username}} 
+        Deck de {{$user->name}} 
     </h2>
     
     @php

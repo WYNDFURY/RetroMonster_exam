@@ -17,26 +17,42 @@
                 href="{{ route('monsters.index') }}">Monstres</a>
             <a class="text-gray-300 hover:text-white px-3 py-2 hover:bg-gray-700"
                 href="{{ route('users.index') }}">Créateurs</a>
-            <a class="text-gray-300 hover:text-white px-3 py-2 hover:bg-gray-700" href="#">Se connecter</a>
+            @auth
+                <!-- Utilisation d'un bouton pour ouvrir le menu déroulant de l'utilisateur -->
+                <div class="relative" x-data="{ userMenuOpen: false }">
+                    <button @click="userMenuOpen = !userMenuOpen" class="text-white">
+                        <img src="{{asset('images/user.webp')}}" alt="" class="w-16" />
+                    </button>
 
-            <!-- Utilisation d'un bouton pour ouvrir le menu déroulant de l'utilisateur -->
-            <div class="relative" x-data="{ userMenuOpen: false }">
-                <button @click="userMenuOpen = !userMenuOpen" class="text-white">
-                    <img src="images/user.webp" alt="" class="w-16" />
-                </button>
-
-                <div x-show="userMenuOpen" @click.away="userMenuOpen = false"
-                    class="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg pb-1 z-50">
-                    <div class="text-gray-200 px-4 py-2 bg-gray-400 text-center">
-                        Username
+                    <div x-show="userMenuOpen" @click.away="userMenuOpen = false"
+                        class="absolute right-0 mt-2 w-48 bg-gray-100 rounded-md shadow-lg pb-1 z-50">
+                        @if (auth()->check())
+                            <div class="text-gray-200 px-4 py-2 bg-gray-400 text-center">
+                                {{ auth()->user()->name }}
+                            </div>
+                        @endif
+                        <a href="
+                        {{ route('user.edit', [
+                                'user' => auth()->user()->id ,
+                            ]) 
+                        }}" 
+                        class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Profil</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Deck</a>
+                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Ajouter un
+                            Monstre</a>
+                        <form action="{{ route('logout') }}" method="POST" class="inline">
+                            @csrf
+                            <button type="submit" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Se
+                                Déconnecter</button>
+                        </form>
                     </div>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Profil</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Deck</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Ajouter un
-                        Monstre</a>
-                    <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Se Déconnecter</a>
                 </div>
-            </div>
+            @else
+                <a class="text-gray-300 hover:text-white px-3 py-2 hover:bg-gray-700" href="register">Créer un compte</a>
+                <a class="text-gray-300 hover:text-white px-3 py-2 hover:bg-gray-700" href="login">Se connecter</a>
+            @endauth
+
+
         </div>
     </nav>
 
@@ -47,7 +63,7 @@
         <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700"
             href="{{ route('users.index') }}">Créateurs</a>
         <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700" href="#">Se connecter</a>
-        <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700" href="#">Mon Profil</a>
+        <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700" href="users/edit">Mon Profil</a>
         <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700" href="#">Mon Deck</a>
         <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700" href="#">Ajouter un Monstre</a>
         <a class="block bg-gray-900 text-white px-4 py-2 hover:bg-gray-700" href="#">Se Déconnecter</a>

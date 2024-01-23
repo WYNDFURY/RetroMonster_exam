@@ -10,7 +10,7 @@
             <div class="p-4">
                 <h3 class="text-xl font-bold">{{ $monster->name }}</h3>
                 <h4 class="mb-2">
-                    <a href="#" class="text-red-400 hover:underline">{{ $monster->user->username }}</a>
+                    <a href="#" class="text-red-400 hover:underline">{{ $monster->user->name }}</a>
                 </h4>
                 <p class="text-gray-300 text-sm mb-2">
                     {{ $monster->description }}

@@ -40,7 +40,7 @@
                             </p>
                             <div class="mb-4">
                                 <strong class="text-white">Créateur:</strong>
-                                <span class="text-red-400">{{ $monster->user->username }}</span>
+                                <span class="text-red-400">{{ $monster->user->name }}</span>
                             </div>
                             <div class="mb-4">
                                 <div>
