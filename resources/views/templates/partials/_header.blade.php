@@ -32,12 +32,13 @@
                             </div>
                         @endif
                         <a href="
-                        {{ route('user.edit', [
-                                'user' => auth()->user()->id ,
+                        {{ route('profile.edit', [
+                                'profile' => auth()->user()->id ,
                             ]) 
                         }}" 
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Profil</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Deck</a>
+                        <a href="
+                        {{ route('users.my-deck') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Deck</a>
                         <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Ajouter un
                             Monstre</a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">

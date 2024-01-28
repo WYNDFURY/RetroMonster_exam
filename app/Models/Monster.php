@@ -32,12 +32,6 @@ class Monster extends Model
         return $this->hasMany(Comment::class);
     }
 
-    public function favorites()
-    {
-        return $this->belongsToMany(User::class, 'favorites', 'monster_id', 'user_id')
-            ->withTimestamps();
-    }
-
     public function notations()
     {
         return $this->hasMany(Notation::class);

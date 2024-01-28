@@ -1,0 +1,63 @@
+<div class="container mx-auto pb-12">
+  <div class="flex flex-wrap justify-center">
+    <div class="w-full">
+      <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
+        <h2 class="text-2xl font-bold mb-4 text-center creepster">
+          Ajouter un nouveau monstre
+        </h2>
+        <form method="POST" action="{{ route('monster.store') }}" class="space-y-6">
+          @csrf
+          <div>
+            <label for="name" class="block mb-1">Nom du monstre</label>
+            <input
+              type="text"
+              id="name"
+              name="name"
+              class="w-full border rounded px-3 py-2 text-gray-700"
+              placeholder="Nom du monstre"
+            />
+          </div>
+          <div>
+            <label for="description" class="block mb-1">Description</label>
+            <textarea
+              id="description"
+              name="description"
+              class="w-full border rounded px-3 py-2 text-gray-700"
+              placeholder="Description du monstre"
+              rows="4"
+            ></textarea>
+          </div>
+          <div>
+            <label for="image_url" class="block mb-1">URL de l'image</label>
+            <input
+              type="text"
+              id="image_url"
+              name="image_url"
+              class="w-full border rounded px-3 py-2 text-gray-700"
+              placeholder="URL de l'image"
+            />
+          </div>
+          <div>
+            <label for="type" class="block mb-1">Type</label>
+            <input
+              type="text"
+              id="type"
+              name="type"
+              class="w-full border rounded px-3 py-2 text-gray-700"
+              placeholder="Type du monstre"
+            />
+          </div>
+          <div class="flex justify-between items-center">
+            <button
+              type="submit"
+              class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
+            >
+              Ajouter le monstre
+            </button>
+            <a href="#" class="text-red-400 hover:text-red-500">Annuler</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

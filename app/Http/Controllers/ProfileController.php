@@ -17,7 +17,7 @@ class ProfileController extends Controller
      */
     public function edit(Request $request): View
     {
-        return view('users.edit', [
+        return view('profile.edit', [
             'user' => $request->user(),
         ]);
     }
@@ -26,47 +26,18 @@ class ProfileController extends Controller
      * Update the user's profile information.
      */
 
-    public function update(Request $request)
+    public function update(ProfileUpdateRequest $request): RedirectResponse
     {
-        // Validate the request data
-        $request->validate([
-            'name' => 'required|string|max:255',
-            'email' => 'required|email|max:255',
-            'new-password' => 'nullable|min:8|confirmed',
-        ]);
+        $request->user()->fill($request->validated());
 
-        // Retrieve the authenticated user
-        $user = $request->user();
-
-        // Update user attributes
-        $user->name = $request->name;
-        $user->email = $request->email;
-
-        // Update password if provided
-        $newPassword = $request->input('new-password');
-        if ($newPassword) {
-            $user->password = Hash::make($newPassword);
+        if ($request->user()->isDirty('email')) {
+            $request->user()->email_verified_at = null;
         }
 
-        // Save the changes
-        $user->save();
+        $request->user()->save();
 
-        // Redirect back or to a success page
-        return Redirect::route('user.edit')->with('status', 'Profile updated successfully');
+        return Redirect::route('profile.edit')->with('status', 'profile-updated');
     }
-
-    // public function update(ProfileUpdateRequest $request): RedirectResponse
-    // {
-    //     $request->user()->fill($request->validated());
-
-    //     if ($request->user()->isDirty('email')) {
-    //         $request->user()->email_verified_at = null;
-    //     }
-
-    //     $request->user()->save();
-
-    //     return Redirect::route('user.edit')->with('status', 'profile-updated');
-    // }
 
     /**
      * Delete the user's account.
