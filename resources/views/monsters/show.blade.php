@@ -14,7 +14,7 @@
                         <!-- Image du monstre -->
                         <div class="w-full md:w-1/2 relative">
                             <img class="w-full h-full object-cover rounded-t-lg md:rounded-l-lg md:rounded-t-none"
-                                src="{{ asset('images/' . $monster->image_url) }}" alt="{{ $monster->name }}" />
+                                src="{{ asset('storage/' . $monster->image_url) }}" alt="{{ $monster->name }}" />
                             <div class="absolute top-4 right-4">
                                 <button
                                     class="text-white bg-gray-400 hover:bg-red-700 rounded-full p-2 transition-colors duration-300"

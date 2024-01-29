@@ -18,7 +18,7 @@
         <div class="min-h-screen flex flex-col sm:justify-center items-center pt-6 sm:pt-0 bg-gray-100 dark:bg-gray-900">
             <div>
                 <a href="{{route('pages.home')}}">
-                    <img src="{{asset('images/Logo_RetroMonsters.png')}}" alt="retro monster logo" class="w-60 h-52">
+                    <img src="{{asset('storage/images/Logo_RetroMonsters.png')}}" alt="retro monster logo" class="w-60 h-52">
                 </a>
             </div>
 

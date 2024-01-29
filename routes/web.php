@@ -33,15 +33,19 @@ Route::get('/users', function () {
     return view('users.index');
 })->name('users.index');
 
-Route::get('/users/{user}/{slug}', function(\App\Models\User $user){
+Route::get('/users/{user}/{slug}', function (\App\Models\User $user) {
     return view('users.show', compact('user'));
 })->name('users.show');
 
-Route::get('/my-deck', function () {
-    return view('users.my-deck');
-})->name('users.my-deck');
-
 Route::middleware('auth')->group(function () {
+    Route::get('/my-deck', function () {
+        return view('users.my-deck');
+    })->name('users.my-deck');
+
+    Route::get('/my-cards', function () {
+        return view('users.my-cards');
+    })->name('users.my-cards');
+
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
@@ -55,17 +59,24 @@ Route::get('/monsters', function () {
     return view('monsters.index');
 })->name('monsters.index');
 
-Route::get('/monsters/{monster}/{slug}', function(\App\Models\Monster $monster){
+Route::get('/monsters/{monster}/{slug}', function (\App\Models\Monster $monster) {
     return view('monsters.show', compact('monster'));
 })->name('monsters.show');
 
+Route::get('/monsters/{monster}/{slug}/edit', function (\App\Models\Monster $monster) {
+    return view('monsters._edit', compact('monster'));
+})->name('monsters.edit');
+
+Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
+
 Route::get('/monsters/add', function () {
-    return view('monsters.add');
+    return view('monsters._add');
 })->name('monsters.add');
 
 Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
+Route::post('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
 
 
 
 
-require __DIR__.'/auth.php';
+require __DIR__ . '/auth.php';

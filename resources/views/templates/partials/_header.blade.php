@@ -2,7 +2,7 @@
     <nav class="container mx-auto px-4 py-4 mb-16 flex justify-between items-center">
         <div class="flex items-center">
             <a href="{{ route('pages.home') }}">
-                <img src="{{ asset('images/Logo_RetroMonsters.png') }}" alt="RetroMonsters Logo" class="h-32 mr-3 absolute"
+                <img src="{{ asset('storage/images/Logo_RetroMonsters.png') }}" alt="RetroMonsters Logo" class="h-32 mr-3 absolute"
                     style="top: -28px" />
             </a>
             <a href="{{ route('pages.home') }}" class="text-white font-bold text-xl hidden">RetroMonsters</a>
@@ -21,7 +21,7 @@
                 <!-- Utilisation d'un bouton pour ouvrir le menu déroulant de l'utilisateur -->
                 <div class="relative" x-data="{ userMenuOpen: false }">
                     <button @click="userMenuOpen = !userMenuOpen" class="text-white">
-                        <img src="{{asset('images/user.webp')}}" alt="" class="w-16" />
+                        <img src="{{asset('storage/images/user.webp')}}" alt="" class="w-16" />
                     </button>
 
                     <div x-show="userMenuOpen" @click.away="userMenuOpen = false"
@@ -39,6 +39,8 @@
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Profil</a>
                         <a href="
                         {{ route('users.my-deck') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Deck</a>
+                        <a href="
+                        {{ route('users.my-cards') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mes Cartes</a>
                         <a href="{{ route('monsters.add') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Ajouter un
                             Monstre</a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">

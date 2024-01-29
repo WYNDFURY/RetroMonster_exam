@@ -1,7 +1,7 @@
 <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
     <!-- Monster Item -->
 
-    @foreach ($monsters as $monster)
+@foreach ($monsters as $monster)
         <article
             class="relative bg-gray-700 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 monster-card"
             data-monster-type="{{ $monster->type->name }}">
@@ -30,28 +30,45 @@
                     <span class="text-sm text-gray-300">Défense: {{ $monster->defense }}</span>
 
                 </div>
-                <div class="text-center">
-                    <a href="{{ route('monsters.show', [
-                        'monster' => $monster->id,
-                        'slug' => \Illuminate\Support\Str::slug($monster->name),
-                    ]) }}"
-                        class="inline-block text-white bg-red-500 hover:bg-red-700 rounded-full px-4 py-2 transition-colors duration-300">Plus
-                        de détails</a>
-                </div>
+                <div class="flex justify-between items-center mt-4">
+                    <div class="text-center">
+                        <a href="{{ route('monsters.show', [
+                                'monster' => $monster->id,
+                                'slug' => \Illuminate\Support\Str::slug($monster->name),
+                            ]) }}"
+                            class="inline-block text-white bg-red-500 hover:bg-red-700 rounded-full px-4 py-2 transition-colors duration-300">Plus
+                            de détails</a>
+                    </div>
+                    @if ($monster->user_id === auth()->id())
+                        <a href="{{ route('monsters.edit', [
+                                'monster' => $monster->id,
+                                'slug' => \Illuminate\Support\Str::slug($monster->name)
+                            ]) }}"
+                            class="text-white bg-red-500 hover:bg-red-700 rounded-full px-4 py-2 transition-colors duration-300">
+                            Edit
+                        </a>
+                        <form action="{{ route('monsters.destroy', ['monster' => $monster->id]) }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit"
+                                class="text-white bg-red-500 hover:bg-red-700 rounded-full px-4 py-2 transition-colors duration-300">Delete</button>
+                        </form>
+                    @endif
+                </div>    
             </div>
             <div class="absolute top-4 right-4">
                 <button class="text-white bg-gray-400 hover:bg-red-700 rounded-full p-2 transition-colors duration-300"
                     style="
-          width: 40px;
-          height: 40px;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-        ">
+                            width: 40px;
+                            height: 40px;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            ">
                     <i class="fa fa-bookmark"></i>
                 </button>
             </div>
         </article>
-    @endforeach
+@endforeach
 
 </div>

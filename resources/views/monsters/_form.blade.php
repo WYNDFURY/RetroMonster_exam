@@ -1,29 +1,4 @@
-@extends('templates.index')
-
-@section('title')
-  Add Monster
-@stop
-
-@section('content')
-
-@if ($errors->any())
-    <div class="alert alert-danger">
-        <ul>
-            @foreach ($errors->all() as $error)
-                <li>{{ $error }}</li>
-            @endforeach
-        </ul>
-    </div>
-@endif
-  <div class="container mx-auto pb-12">
-    <div class="flex flex-wrap justify-center">
-      <div class="w-full">
-        <div class="bg-gray-700 p-6 rounded-lg shadow-lg">
-          <h2 class="text-2xl font-bold mb-4 text-center creepster">
-            Ajouter un nouveau monstre
-          </h2>
-          <form method="POST" enctype="multipart/form-data" action="{{route('monsters.store')}}" class="space-y-6">
-            @csrf
+          
             <div class="grid grid-cols-2 gap-4">
               <div>
                 <label for="name" class="block mb-1">Nom du monstre</label>
@@ -33,6 +8,7 @@
                   name="name"
                   class="w-full border rounded px-3 py-2 text-gray-700"
                   placeholder="Nom du monstre"
+                  value="{{ isset($monster) ? $monster->name : '' }}"
                 />
               </div>
               <div>
@@ -43,6 +19,7 @@
                   name="pv"
                   class="w-full border rounded px-3 py-2 text-gray-700"
                   placeholder="HP du monstre"
+                  value="{{ isset($monster) ? $monster->pv : '' }}"
                 />
               </div>
               <div>
@@ -53,6 +30,7 @@
                   name="attack"
                   class="w-full border rounded px-3 py-2 text-gray-700"
                   placeholder="Attack du monstre"
+                  value="{{ isset($monster) ? $monster->attack : '' }}"
                 />
               </div>
               <div>
@@ -63,6 +41,7 @@
                   name="defense"
                   class="w-full border rounded px-3 py-2 text-gray-700"
                   placeholder="Défense du monstre"
+                  value="{{ isset($monster) ? $monster->defense : '' }}"
                 />
               </div>
               <div>
@@ -72,7 +51,7 @@
                       $types = App\Models\MonsterType::all();
                   @endphp
                   @foreach($types->all() as $type)
-                    <option value="{{ $type->id }}">{{ $type->name }}</option>
+                    <option value="{{ $type->id }}" {{ isset($monster) && $monster->type_id == $type->id ? 'selected' : '' }}>{{ $type->name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -83,7 +62,7 @@
                       $rarities = App\Models\Rarity::all();
                   @endphp
                   @foreach($rarities->all() as $rarity)
-                    <option value="{{ $rarity->id }}">{{ $rarity->name }}</option>
+                    <option value="{{ $rarity->id }}" {{ isset($monster) && $monster->rarety_id == $rarity->id ? 'selected' : '' }}>{{ $rarity->name }}</option>
                   @endforeach
                 </select>
               </div>
@@ -95,7 +74,7 @@
                   class="w-full border rounded px-3 py-2 text-gray-700"
                   placeholder="Description du monstre"
                   rows="4"
-                ></textarea>
+                >{{ isset($monster) ? $monster->description : '' }}</textarea>
               </div>
               <div>
                 <label for="image_url" class="block mb-1">Image</label>
@@ -106,7 +85,11 @@
                   class="w-full border rounded px-3 py-2 text-gray-700"
                   onchange="previewImage(this)"
                 />
-                <img id="image_preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;">
+                @if(isset($monster) && $monster->image_url)
+                  <img id="image_preview" src="{{ asset('storage/' . $monster->image_url) }}" alt="Image Preview" style="max-width: 100%; height: auto;">
+                @else
+                  <img id="image_preview" src="#" alt="Image Preview" style="display: none; max-width: 100%; height: auto;">
+                @endif
               </div>
 
               <script>
@@ -124,18 +107,4 @@
                 }
               </script>
             </div>
-            <div class="flex justify-between items-center">
-              <button
-                type="submit"
-                class="bg-green-500 hover:bg-green-700 text-white font-bold py-2 px-4 rounded"
-              >
-                Ajouter le monstre
-              </button>
-              <a href="#" class="text-red-400 hover:text-red-500">Annuler</a>
-            </div>
           </form>
-        </div>
-      </div>
-    </div>
-  </div>
-@stop
