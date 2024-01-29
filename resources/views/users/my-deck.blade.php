@@ -12,8 +12,4 @@
     'monsters' => auth()->user()->favorites()->orderBy('created_at', 'DESC')->get(),
 ])
 
-@php
-//    echo(  dd(auth()->user()))
-@endphp
-
 @endsection

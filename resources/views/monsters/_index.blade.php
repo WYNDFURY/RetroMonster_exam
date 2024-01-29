@@ -5,7 +5,7 @@
         <article
             class="relative bg-gray-700 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 monster-card"
             data-monster-type="{{ $monster->type->name }}">
-            <img class="w-full h-48 object-cover rounded-t-lg" src="{{ asset('images/' . $monster->image_url) }}"
+            <img class="w-full h-48 object-cover rounded-t-lg" src="{{ asset('storage/' . $monster->image_url) }}"
                 alt="{{ $monster->name }}" />
             <div class="p-4">
                 <h3 class="text-xl font-bold">{{ $monster->name }}</h3>

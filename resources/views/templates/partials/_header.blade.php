@@ -39,7 +39,7 @@
                         class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Profil</a>
                         <a href="
                         {{ route('users.my-deck') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Mon Deck</a>
-                        <a href="#" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Ajouter un
+                        <a href="{{ route('monsters.add') }}" class="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-200">Ajouter un
                             Monstre</a>
                         <form action="{{ route('logout') }}" method="POST" class="inline">
                             @csrf
