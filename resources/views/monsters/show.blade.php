@@ -69,33 +69,7 @@
             </section>
 
             <!-- Section d'évaluation -->
-            <div class="mt-6">
-                <h3 class="text-2xl font-bold mb-4">Évaluez ce Monstre</h3>
-                <div id="rating-section" class="flex items-center">
-                    @for ($i = 1; $i <= 5; $i++)
-                        <span class="rating-star" data-value="{{ $i }}">&#9733;</span>
-                    @endfor
-                </div>
-            </div>
-            <script>
-                document.querySelectorAll(".rating-star").forEach((star) => {
-                    star.onclick = function() {
-                        let rating = this.getAttribute("data-value");
-                        document
-                            .querySelectorAll(".rating-star")
-                            .forEach((innerStar) => {
-                                if (innerStar.getAttribute("data-value") <= rating) {
-                                    innerStar.classList.add("selected");
-                                } else {
-                                    innerStar.classList.remove("selected");
-                                }
-                            });
-                        // Send the 'rating' value to the server or process it as needed
-                        // Example: You can use AJAX to send the rating to the server
-                        // and update the database accordingly.
-                    };
-                });
-            </script>
+            @include('components.rating', ['monster' => $monster])
 
             <!-- Section commentaires -->
             <div class="mt-6">

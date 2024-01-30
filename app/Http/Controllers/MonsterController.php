@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Monster;
+use App\Models\Notation;
 use Illuminate\Http\Request;
 
 class MonsterController extends Controller
@@ -98,6 +99,19 @@ class MonsterController extends Controller
         $monster->delete();
 
         return redirect()->route('users.my-cards')->with('success', 'Monster has been deleted successfully');
+    }
+
+    public function rate(Request $request)
+    {
+        $monsterId = $request->monsterId;	
+        $userId = auth()->user()->id;
+        $notation = $request->input('rating');
+        Notation::updateOrCreate(
+            ['user_id' => $userId, 'monster_id' => $monsterId],
+            ['notation' => $notation],
+        );
+
+        return back();
     }
 
 }

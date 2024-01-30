@@ -13,10 +13,14 @@ class SearchController extends Controller
     {
         $text = $request->input('texte');
 
-        // Perform the search query based on the monster name
-        $monsters = Monster::where('name', 'LIKE', '%' . $text . '%')->get();
+        $monsterNames = explode(',', $text);
 
-        // Return the search results to the view
+        $monsters = Monster::where(function ($query) use ($monsterNames) {
+            foreach ($monsterNames as $name) {
+                $query->orWhereRaw('LOWER(name) = ?', [strtolower(trim($name))]);
+            }
+        })->get();
+
         return view('monsters.results', ['monsters' => $monsters]);
     }
 

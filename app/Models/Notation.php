@@ -9,6 +9,14 @@ class Notation extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'user_id',
+        'monster_id',
+        'notation',
+    ];
+
+    protected $primaryKey = 'monster_id';
+
     public function user()
     {
         return $this->belongsTo(User::class);

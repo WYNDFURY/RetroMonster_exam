@@ -5,9 +5,13 @@
 @stop
 
 @section('content')
-    @include('monsters._random',
-    ['monsters' => [\App\Models\Monster::inRandomOrder()->first()],
-])
+    @include('monsters._random', ['monsters' => [\App\Models\Monster::inRandomOrder()->first()]])
     @include('monsters._latest')
-    @include('monsters._latestFromFollowed')
+    @auth
+        
+            @if (auth()->user()->follows->count() > 0)
+                @include('monsters._latestFromFollowed')
+            @endif
+        
+    @endauth
 @stop

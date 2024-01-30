@@ -29,6 +29,7 @@ Route::get('/dashboard', function () {
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/filter', [SearchController::class, 'filter'])->name('filter');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
+Route::post('/rate', [MonsterController::class, 'rate'])->middleware('auth')->name('monsters.rate');
 
 // USERS Related routes
 Route::get('/users', function () {

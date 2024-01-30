@@ -66,7 +66,10 @@
                     @endif
                 </div>    
             </div>
-            @include('components.favorites-form', ['monster' => $monster])
+
+                @auth
+                    @include('components.favorites-form', ['monster' => $monster])
+                @endauth
         </article>
 @endforeach
 
