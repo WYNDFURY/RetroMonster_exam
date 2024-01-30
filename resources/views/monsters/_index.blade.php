@@ -3,7 +3,7 @@
 
 @foreach ($monsters as $monster)
         <article
-            class="relative bg-gray-700 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 monster-card"
+            class="relative bg-gray-700 rounded-lg shadow-lg hover:shadow-2xl transition-shadow duration-300 monster-card my-8"
             data-monster-type="{{ $monster->type->name }}">
             <img class="w-full h-48 object-cover rounded-t-lg" src="{{ asset('storage/' . $monster->image_url) }}"
                 alt="{{ $monster->name }}" />
@@ -66,18 +66,7 @@
                     @endif
                 </div>    
             </div>
-            <div class="absolute top-4 right-4">
-                <button class="text-white bg-gray-400 hover:bg-red-700 rounded-full p-2 transition-colors duration-300"
-                    style="
-                            width: 40px;
-                            height: 40px;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            ">
-                    <i class="fa fa-bookmark"></i>
-                </button>
-            </div>
+            @include('components.favorites-form', ['monster' => $monster])
         </article>
 @endforeach
 

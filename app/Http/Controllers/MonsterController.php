@@ -99,4 +99,5 @@ class MonsterController extends Controller
 
         return redirect()->route('users.my-cards')->with('success', 'Monster has been deleted successfully');
     }
+
 }

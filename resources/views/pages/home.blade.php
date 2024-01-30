@@ -9,4 +9,5 @@
     ['monsters' => [\App\Models\Monster::inRandomOrder()->first()],
 ])
     @include('monsters._latest')
+    @include('monsters._latestFromFollowed')
 @stop

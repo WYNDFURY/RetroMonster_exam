@@ -14,20 +14,7 @@
                         src="{{ asset('storage/' . $monster->image_url) }}"
                         alt="{{ $monster->name }}"
                     />
-                    <div class="absolute top-4 right-4">
-                        <button
-                            class="text-white bg-gray-400 hover:bg-red-700 rounded-full p-2 transition-colors duration-300"
-                            style="
-                                width: 40px;
-                                height: 40px;
-                                display: flex;
-                                justify-content: center;
-                                align-items: center;
-                            "
-                        >
-                            <i class="fa fa-bookmark"></i>
-                        </button>
-                    </div>
+                    @include('components.favorites-form', ['monster' => $monster])
                 </div>
 
                 <!-- Détails du monstre -->

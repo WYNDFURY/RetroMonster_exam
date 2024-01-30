@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\CommentController;
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MonsterController;
 use App\Http\Controllers\SearchController;
@@ -17,7 +18,6 @@ use Illuminate\Support\Facades\Route;
 */
 
 // MISC
-
 Route::get('/', function () {
     return view('pages.home');
 })->name('pages.home');
@@ -28,10 +28,9 @@ Route::get('/dashboard', function () {
 
 Route::get('/search', [SearchController::class, 'search'])->name('search');
 Route::get('/filter', [SearchController::class, 'filter'])->name('filter');
+Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 
-
-// CRUD USERS
-
+// USERS Related routes
 Route::get('/users', function () {
     return view('users.index');
 })->name('users.index');
@@ -44,6 +43,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-deck', function () {
         return view('users.my-deck');
     })->name('users.my-deck');
+
+    Route::post('/add-favorite', [ProfileController::class, 'addFavorite'])->name('users.add-favorite');
+    Route::delete('/remove-favorite', [ProfileController::class, 'removeFavorite'])->name('users.remove-favorite');
 
     Route::get('/my-cards', function () {
         return view('users.my-cards');
@@ -66,20 +68,29 @@ Route::get('/monsters/{monster}/{slug}', function (\App\Models\Monster $monster)
     return view('monsters.show', compact('monster'));
 })->name('monsters.show');
 
-Route::get('/monsters/{monster}/{slug}/edit', function (\App\Models\Monster $monster) {
-    return view('monsters._edit', compact('monster'));
-})->name('monsters.edit');
 
-Route::get('/monsters/add', function () {
-    return view('monsters._add');
-})->name('monsters.add');
+Route::middleware('auth')->group(function () {
 
-Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
-Route::patch('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
-Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
+    Route::get('/monsters/add', function () {
+        return view('monsters._add');
+    })->name('monsters.add');
+    
+    Route::middleware('monsterOwner')->group(function(){
+        Route::get('/monsters/{monster}/{slug}/edit', function (\App\Models\Monster $monster) {
+            return view('monsters._edit', compact('monster'));
+        })->name('monsters.edit');
+        
+        Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
+        Route::patch('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
+        Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
+    });
+});
 
 
-
+// FALLBACK
+Route::fallback(function () {
+    return redirect()->route('pages.home');
+});
 
 
 require __DIR__ . '/auth.php';
