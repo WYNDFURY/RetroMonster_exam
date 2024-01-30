@@ -42,15 +42,15 @@ class MonsterController extends Controller
 
         $monster->save();
 
-        return redirect()->route('monsters.index')->with('success', 'Monster has been added successfully');
+        return redirect()->route('users.my-cards')->with('success', 'Monster has been added successfully');
     }
 
 
-    public function update(Request $request, string $id)
+    public function update(Request $request)
     {
-        $monster = Monster::findOrFail($id);
+        $monster = Monster::findOrFail($request->id);
 
-            if (auth()->user()->id !== $monster->user_id) {
+        if (auth()->user()->id !== $monster->user_id) {
             return redirect()->route('monsters.index')->with('error', 'You are not authorized to update this monster.');
         }
 
@@ -83,10 +83,9 @@ class MonsterController extends Controller
 
         $monster->save();
 
-        return redirect()->route('monsters.index')->with('success', 'Monster has been added successfully');
-    
+        return redirect()->route('users.my-cards')->with('success', 'Monster has been added successfully');
     }
-    
+
 
     public function destroy(string $id)
     {
@@ -98,6 +97,6 @@ class MonsterController extends Controller
 
         $monster->delete();
 
-        return redirect()->route('monsters.index')->with('success', 'Monster has been deleted successfully');
+        return redirect()->route('users.my-cards')->with('success', 'Monster has been deleted successfully');
     }
 }

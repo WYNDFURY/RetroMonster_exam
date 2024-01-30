@@ -40,12 +40,22 @@
                             </p>
                             <div class="mb-4">
                                 <strong class="text-white">Créateur:</strong>
-                                <span class="text-red-400">{{ $monster->user->name }}</span>
+                                <a href="{{ route('users.show', [
+                                    'user' => $monster->user->id, 
+                                    'slug' => $monster->user->name]) }}" 
+                                class="text-red-400"
+                                >
+                                    {{ $monster->user->name }}
+                                </a>
                             </div>
                             <div class="mb-4">
                                 <div>
                                     <strong class="text-white">Type:</strong>
                                     <span class="text-gray-300">{{ $monster->type->name }}</span>
+                                </div>
+                                <div>
+                                    <strong class="text-white">Rareté:</strong>
+                                    <span class="text-gray-300">{{ $monster->rarity->name }}</span>
                                 </div>
                                 <div>
                                     <strong class="text-white">PV:</strong>

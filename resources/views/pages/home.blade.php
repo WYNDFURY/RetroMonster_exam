@@ -5,6 +5,8 @@
 @stop
 
 @section('content')
-    @include('monsters._random')
+    @include('monsters._random',
+    ['monsters' => [\App\Models\Monster::inRandomOrder()->first()],
+])
     @include('monsters._latest')
 @stop

@@ -8,7 +8,7 @@
     <div class="container mx-auto flex flex-wrap pb-12">
         <!-- Page de détail du monstre -->
         <section class="w-full">
-            <section class="mb-20">
+            <section class="mb-10">
                 <h2 class="text-4xl font-bold creepster text-center mb-8">
                     Profil de {{$user->name}} 
                 </h2>
@@ -51,17 +51,32 @@
                     </div>
                 </div>
             </section>
+            <section>
+                <h2 class="text-4xl font-bold creepster text-center my-8">
+                    Deck de {{$user->name}} 
+                </h2>
+                
+                @php
+                    $monsters = $user->favorites
+                @endphp
+                @include('monsters._index', ['monsters' => $monsters])
+            </section>
+            <section>
+                <h2 class="text-4xl font-bold creepster text-center my-8">
+                    Cartes créées par {{$user->name}} 
+                </h2>
+                
+                @php
+                    $monsters = $user->monsters->where('user_id', $user->id);
+                @endphp
+                @include('monsters._index', ['monsters' => $monsters])
+            </section>
         </section>
     </div>
 
-    <h2 class="text-4xl font-bold creepster text-center mb-8">
-        Deck de {{$user->name}} 
-    </h2>
     
-    @php
-        $monsters = $user->favorites
-    @endphp
-    @include('monsters._index', ['monsters' => $monsters])
-            
+    
+    
+
 
 @stop

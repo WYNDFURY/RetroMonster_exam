@@ -1,7 +1,7 @@
 @extends('templates.index')
 
 @section('title')
-    List of Users
+    My Deck
 @stop
 
 @section('content')

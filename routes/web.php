@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\MonsterController;
+use App\Http\Controllers\SearchController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -25,6 +26,8 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
+Route::get('/search', [SearchController::class, 'search'])->name('search');
+Route::get('/filter', [SearchController::class, 'filter'])->name('filter');
 
 
 // CRUD USERS
@@ -67,14 +70,14 @@ Route::get('/monsters/{monster}/{slug}/edit', function (\App\Models\Monster $mon
     return view('monsters._edit', compact('monster'));
 })->name('monsters.edit');
 
-Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
-
 Route::get('/monsters/add', function () {
     return view('monsters._add');
 })->name('monsters.add');
 
 Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
-Route::post('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
+Route::patch('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
+Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
+
 
 
 

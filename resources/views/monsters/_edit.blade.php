@@ -15,8 +15,13 @@
         </ul>
     </div>
 @endif
-<form method="POST" enctype="multipart/form-data" action="{{route('monsters.update')}}" class="space-y-6">
+<form 
+  method="POST" 
+  enctype="multipart/form-data" 
+  action="{{route('monsters.update')}}" 
+  class="space-y-6">
   @csrf
+  @method('PATCH')
   <div class="container mx-auto pb-12">
     <div class="flex flex-wrap justify-center">
       <div class="w-full">
@@ -32,7 +37,7 @@
             >
               Modifier le monstre
             </button>
-            <a href="#" class="text-red-400 hover:text-red-500">Annuler</a>
+            <a href="{{route('pages.home')}}" class="text-red-400 hover:text-red-500">Annuler</a>
           </div>
         </form>
       </div>

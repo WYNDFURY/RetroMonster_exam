@@ -1,6 +1,6 @@
 <aside class="mx-auto md:w-1/4 p-4">
-    <!-- Formulaire de Recherche Full Texte -->
-    <form action="/recherche-texte" method="GET" class="bg-gray-700 rounded-lg shadow-lg p-4 mb-6">
+
+    <form action="{{route('search')}}" method="GET" class="bg-gray-700 rounded-lg shadow-lg p-4 mb-6">
         <h2 class="font-bold text-lg mb-4">Recherche</h2>
         <input type="text" name="texte" placeholder="Chercher un monstre..."
             class="w-full p-2 mb-4 bg-gray-800 rounded" />
@@ -10,7 +10,7 @@
     </form>
 
     <!-- Formulaire de Recherche par Critères -->
-    <form action="/recherche-criteres" method="GET" class="bg-gray-700 rounded-lg shadow-lg p-4">
+    <form action="{{route('filter')}}" method="GET" class="bg-gray-700 rounded-lg shadow-lg p-4">
         <h2 class="font-bold text-lg mb-4">Filtrer par Critères</h2>
 
         <!-- Type -->
@@ -24,7 +24,7 @@
         </select>
 
         <!-- Rareté -->
-        <select name="rarete" class="w-full p-2 mb-4 bg-gray-800 rounded">
+        <select name="rarity" class="w-full p-2 mb-4 bg-gray-800 rounded">
             <option value="" disabled selected>Choisir une rareté</option>
             <option value="commun">Commun</option>
             <option value="rare">Rare</option>

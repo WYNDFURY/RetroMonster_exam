@@ -10,8 +10,14 @@
             <div class="p-4">
                 <h3 class="text-xl font-bold">{{ $monster->name }}</h3>
                 <h4 class="mb-2">
-                    <a href="#" class="text-red-400 hover:underline">{{ $monster->user->name }}</a>
+                    <a 
+                    href="{{route('users.show', [
+                        'user' => $monster->user->id,
+                        'slug' => \Illuminate\Support\Str::slug($monster->user->name)
+                    ])}}" 
+                    class="text-red-400 hover:underline">{{ $monster->user->name }}</a>
                 </h4>
+
                 <p class="text-gray-300 text-sm mb-2">
                     {{ $monster->description }}
                 </p>
@@ -22,7 +28,11 @@
                         <span
                             class="text-gray-300 text-sm">({{ number_format($monster->notations->avg('notation'), 1) }}/5.0)</span>
                     </div>
+                    
+                </div>
+                <div class="flex justify-between items-center mb-4">
                     <span class="text-sm text-gray-300">Type: {{ $monster->type->name }}</span>
+                    <span class="text-sm text-gray-300">Rareté: {{ $monster->rarity->name }}</span>
                 </div>
                 <div class="flex justify-between items-center mb-4">
                     <span class="text-sm text-gray-300">PV: {{ $monster->pv }}</span>

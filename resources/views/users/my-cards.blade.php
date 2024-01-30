@@ -1,11 +1,11 @@
 @extends('templates.index')
 
 @section('title')
-    List of Users
+    My Created Monsters
 @stop
 
 @section('content')
-<h2 class="text-2xl font-bold mb-4 creepster">My Deck</h2>
+<h2 class="text-2xl font-bold mb-4 creepster">My Created Monsters</h2>
 
 
 @include('monsters._index', [

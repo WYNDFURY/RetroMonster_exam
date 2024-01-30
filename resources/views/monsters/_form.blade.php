@@ -82,7 +82,7 @@
                   type="file"
                   id="image_url"
                   name="image_url"
-                  class="w-full border rounded px-3 py-2 text-gray-700"
+                  class="w-full rounded px-3 py-2 text-gray-700"
                   onchange="previewImage(this)"
                 />
                 @if(isset($monster) && $monster->image_url)

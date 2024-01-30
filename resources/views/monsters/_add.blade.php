@@ -32,7 +32,7 @@
             >
               Ajouter le monstre
             </button>
-            <a href="#" class="text-red-400 hover:text-red-500">Annuler</a>
+            <a href="{{route('pages.home')}}" class="text-red-400 hover:text-red-500">Annuler</a>
           </div>
         </form>
       </div>
