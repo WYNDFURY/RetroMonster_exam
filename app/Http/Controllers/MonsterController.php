@@ -49,7 +49,7 @@ class MonsterController extends Controller
 
     public function update(Request $request)
     {
-        $monster = Monster::findOrFail($request->id);
+        $monster = Monster::findOrFail($request->monster_id);
 
         if (auth()->user()->id !== $monster->user_id) {
             return redirect()->route('monsters.index')->with('error', 'You are not authorized to update this monster.');

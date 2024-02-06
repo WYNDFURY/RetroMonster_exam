@@ -21,6 +21,8 @@ class CommentController extends Controller
         ]);
 
 
-        return response()->json($comment);
+        response()->json($comment);
+
+        return redirect()->back();
     }
 }

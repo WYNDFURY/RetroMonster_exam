@@ -31,6 +31,10 @@ Route::get('/filter', [SearchController::class, 'filter'])->name('filter');
 Route::post('/comments', [CommentController::class, 'store'])->name('comments.store');
 Route::post('/rate', [MonsterController::class, 'rate'])->middleware('auth')->name('monsters.rate');
 
+Route::get('/storage/{extra}', function ($extra) {
+    return redirect("/public/storage/$extra");
+})->where('extra', '.*');
+
 // USERS Related routes
 Route::get('/users', function () {
     return view('users.index');
@@ -75,16 +79,15 @@ Route::middleware('auth')->group(function () {
     Route::get('/monsters/add', function () {
         return view('monsters._add');
     })->name('monsters.add');
-    
-    Route::middleware('monsterOwner')->group(function(){
-        Route::get('/monsters/{monster}/{slug}/edit', function (\App\Models\Monster $monster) {
-            return view('monsters._edit', compact('monster'));
-        })->name('monsters.edit');
-        
-        Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
-        Route::patch('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
-        Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
-    });
+
+
+    Route::get('/monsters/{monster}/{slug}/edit', function (\App\Models\Monster $monster) {
+        return view('monsters._edit', compact('monster'));
+    })->name('monsters.edit');
+
+    Route::post('/monsters', [MonsterController::class, 'store'])->name('monsters.store');
+    Route::patch('/monsters', [MonsterController::class, 'update'])->name('monsters.update');
+    Route::delete('/monsters/{monster}', [MonsterController::class, 'destroy'])->name('monsters.destroy');
 });
 
 
